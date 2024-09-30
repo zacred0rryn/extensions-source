@@ -44,10 +44,10 @@ class Vomic : HttpSource(), ConfigurableSource {
         val domain = Injekt.get<Application>().getSharedPreferences("source_$id", 0x0000).getString(DOMAIN_PREF, DEFAULT_DOMAIN)!!
         if (domain.startsWith("www.") || domain.startsWith("api.")) {
             val tld = domain.substring(4)
-            baseUrl = "http://www.$tld"
-            apiUrl = "http://api.$tld"
+            baseUrl = "https://www.$tld"
+            apiUrl = "https://api.$tld"
         } else {
-            val url = "http://$domain"
+            val url = "https://$domain"
             baseUrl = url
             apiUrl = url
         }
@@ -171,7 +171,7 @@ class Vomic : HttpSource(), ConfigurableSource {
         EditTextPreference(screen.context).apply {
             key = DOMAIN_PREF
             title = "网址"
-            summary = "不带 http:// 前缀，重启生效\n备选网址：$DEFAULT_DOMAIN 或 119.23.243.52"
+            summary = "不带 http(s):// 前缀，重启生效\n备选网址：$DEFAULT_DOMAIN"
             setDefaultValue(DEFAULT_DOMAIN)
         }.let(screen::addPreference)
     }
